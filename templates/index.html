@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MyGPT</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.2.x/dist/typography.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="icon" type="image/svg" href="/static/mygpt.png">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+
+            <!-- New Chat 按钮 -->
+            <button class="new-chat-button" id="new-chat-button">
+                <i class="far fa-plus"></i> New Chat
+            </button>
+
+            <!-- 对话列表 -->
+            <ul class="conversation-list" id="conversation-list">
+            </ul>
+
+            <!-- 用户头像和用户名 -->
+            <div class="sidebar-footer">
+                <div class="separator"></div>
+                <button id="clear-all"> <i class="fa-regular fa-trash-can"></i><div class="clear-all-data"> Clear All</div></button>
+                <div class="user-profile">
+                    <img src="/static/avatar.png" alt="User Avatar">
+                    <span class="user-name">qingwave</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话内容 -->
+        <div class="content">
+
+            <!-- 头部 -->
+            <div class="header">
+                <div class="avatar-container">
+                    <img src="/static/mygpt.png" alt="ChatGPT">
+                </div>
+                <h1>MyGPT</h1>
+            </div>
+
+            <!-- 聊天框 -->
+            <div class="chat-container" id="chat-container">
+                <div class="chat-box" id="chat-box">
+                    <!-- 聊天内容将由JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <!-- 用户输入框 -->
+            <div
+                class="user-input-container">
+                <div class="input-wrapper">
+                    <input type="text" class="user-input" id="user-input"
+                        placeholder="Type your message...">
+                    <button
+                        class="send-button"
+                        id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/main.js" type="module"></script>
+</body>
+
+</html>
