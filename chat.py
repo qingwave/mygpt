@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import openai
+from openai import OpenAI
 import os
 
 app = Flask(__name__)
@@ -12,6 +12,8 @@ if openai_api_key is None:
 # 初始化ChatGPT模型
 model = "gpt-3.5-turbo"
 
+client = OpenAI()
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -23,7 +25,7 @@ def chat():
     print("--->", messages)
 
     # 使用ChatGPT模型进行对话
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages
     )
@@ -31,7 +33,7 @@ def chat():
     print("<---", response)
 
     # 获取模型的回复
-    model_reply = response["choices"][0]["message"]["content"]
+    model_reply = response.choices[0].message.content
 
     return jsonify({"message": model_reply})
 
