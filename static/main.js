@@ -1,9 +1,18 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 const chatContainer = document.getElementById("chat-container");
+
+const {markedHighlight} = globalThis.markedHighlight;
+const mk = new marked.Marked(
+    markedHighlight({
+      langPrefix: '',
+      highlight(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language: language }).value;
+      }
+    })
+);
 
 userInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
@@ -129,8 +138,8 @@ function appendMessage(role, message, cssClass) {
 
     const contentElement = document.createElement("div");
     contentElement.classList.add("message-content", "prose");
-    message = message.replace(/\n/g, "<br>");
-    contentElement.innerHTML =  marked.marked(message);
+
+    contentElement.innerHTML =  mk.parse(message);
     messageElement.appendChild(contentElement);
 
     if (cssClass) {
@@ -175,7 +184,7 @@ function createConversationItem(data, id) {
     if (id) {
         conversationItem.id = id; // 设置对话项的ID
     } else {
-        conversationItem.id = uuidv4(); // 生成唯一ID
+        conversationItem.id = genUUID(); // 生成唯一ID
     }
 
     const icon = document.createElement("i");
@@ -283,3 +292,8 @@ document.getElementById("clear-all").addEventListener("click", function() {
 
     alert("Clear all chat done")
 });
+
+const genUUID = () =>
+  ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+    (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
+);

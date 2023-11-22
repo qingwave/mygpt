@@ -1,14 +1,40 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    /* background-color: #fff; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     overflow: hidden;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 80vw;
+    height: 90vh;
+}
+
+@media screen and (min-width: 1536px) {
+    .container {
+        height: 80vh;
+    }
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 68px;
+}
+
+.hljs-string {
+    color: orange !important;
 }
 
 h1 {
@@ -33,15 +59,15 @@ h1 {
 
 .header {
     width: 100%;
-    height: 80px;
+    min-height: 60px;
     display: flex;
-    padding: 3px 0;
+    padding: 10px 0;
     background-color: #fff;
     align-items: center;
     justify-content: center;
     justify-items: center;
     border-bottom: 1px solid #ccc;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .chat-container {
@@ -66,7 +92,7 @@ h1 {
 
 /* 自定义滚动条 */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 2px;
     /* 设置滚动条宽度 */
 }
 
@@ -84,8 +110,12 @@ h1 {
     /* 滚动条轨道的圆角 */
 }
 
+pre::-webkit-scrollbar {
+    width: 2px;
+    height: 6px;
+}
+
 .user-input-container {
-    position: fixed;
     bottom: 0;
     left: 240px;
     right: 0;
@@ -179,8 +209,10 @@ h1 {
 
 .avatar {
     width: 40px;
+    min-width: 40px;
     height: 40px;
-    /* border-radius: 50%; */
+    min-height: 40px;
+    border-radius: 50%;
     margin-right: 20px;
 }
 
@@ -188,6 +220,7 @@ h1 {
 .user-avatar {
     background-image: url('/static/avatar.png');
     background-size: 100%;
+    filter: grayscale(60%);
 }
 
 .timestamp {
@@ -201,52 +234,79 @@ h1 {
     background-repeat: no-repeat;
 }
 
-.container {
+/* 侧边栏样式 */
+.sidebar {
+    width: 30%;
+    max-width: 400px;
+}
+
+.sidebar-container {
     display: flex;
-    height: 100vh;
-    /* 100% 屏幕高度 */
+    flex-direction: column;
+    background-color: #f0f9ff;
+    height: 100%;
+    padding: 10px 10px;
+}
+
+.sidebar-title{
+    padding: 10px 10px;
     width: 100%;
 }
 
-/* 侧边栏样式 */
-.sidebar {
-    flex: 1;
-    /* 占据剩余宽度 */
-    max-width: 200px;
-    background-color: #262626;
-    height: 100vh;
-    /* 侧边栏背景颜色 */
-    padding: 20px;
-    color: #f0f0f0;
-    overflow-y: auto;
-    /* 其他侧边栏样式 */
+.project {
+    padding: 10px 0;
+    font-size: 1.875rem;
+    font-weight: 800;
+    line-height: 2.5rem;
+    height: 40px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-position: 0%;
+    background-image: linear-gradient(45deg, #3b82f6, #8b5cf6 30%, white 80% );
+}
+
+.describe {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: #475569;
 }
 
 /* 对话详细内容样式 */
 .content {
-    flex: 3;
-    background-color: #fff;
-    /* 对话详细内容背景颜色 */
+    display: flex;
+    flex: 1 1 0%;
+    width: 70%;
+}
+
+.content-container {
+    flex: 1 1 0%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #fff;
 }
 
 .sidebar-footer{
     display: flex;
     flex-direction: column;
-    position: fixed;
-    bottom: 0;
-    width: 200px;
+    width: 100%;
+    height: 80px;
     background-color: inherit;
+    color: #475569;
+    padding: 20px 0; 
+    box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+    margin-bottom: 10px;
 }
 
 #clear-all {
     display: flex;
     background-color: transparent;
-    color: #f0f0f0;
     cursor: pointer;
     /* 边框颜色 */
     border: none;
+    color: inherit;
     border-radius: 5px;
     /* 圆角边框 */
     padding: 10px 0;
@@ -257,7 +317,7 @@ h1 {
 }
 
 #clear-all:hover {
-    background-color: #404040;
+    background-color: #eef2ff;
 }
 
 #clear-all i {
@@ -278,7 +338,7 @@ h1 {
 .user-name {
     padding-left: 5px;
     /* 用户名下方的间距 */
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 /* 用户头像样式 */
@@ -292,17 +352,18 @@ h1 {
 /* New Chat 按钮样式 */
 .new-chat-button {
     background-color: transparent;
-    color: #f0f0f0;
-    border: 1px solid #737373;
+    color: #475569;
+    border: 1px solid #cbd5e1;
     /* 边框颜色 */
     border-radius: 5px;
     /* 圆角边框 */
     padding: 10px 10px;
     /* 内边距 */
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 5px;
     width: 100%;
     text-align: start;
+    height: 40px;
     /* 与用户头像之间的间距 */
 }
 
@@ -313,9 +374,9 @@ h1 {
 /* 对话列表样式 */
 .conversation-list {
     list-style: none;
-    padding: 20px 0;
+    padding: 10px 0;
     flex: 1;
-    height: auto;
+    overflow-y: auto; 
 }
 
 .conversation-list li {
@@ -330,12 +391,14 @@ h1 {
     justify-content: space-between;
     margin: 5px 0; /* 对话项之间的间距 */
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 12px 10px;
     border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    color: #475569;
 }
 
 .conversation-item:hover {
-    background-color: #404040;
+    background-color: #eef2ff;
 }
 
 .conversation-item i {
@@ -357,13 +420,13 @@ h1 {
 .conversation-item button {
     background-color: transparent;
     border: none;
-    color: #737373;
+    color: #475569;
     padding: 0 5px;
     cursor: pointer;
 }
 
 .conversation-item button:hover {
-    color: #f5f5f5;
+    color: #eef2ff;
 }
 
 .conversation-buttons {
@@ -384,13 +447,8 @@ h1 {
     font-size: inherit;
 }
 
-.separator {
-    border: 1px solid #737373; /* 横线的样式，可以根据需要自定义 */
-    margin: 10px 0; /* 横线与对话列表之间的间距 */
-}
-
 .active-conversation {
-    background-color: #525252 !important; /* 设置你希望的背景颜色 */
+    background-image: linear-gradient(45deg, #93c5fd, #c7d2fe) !important; /* 设置你希望的背景颜色 */
 }
 
 .typing {
